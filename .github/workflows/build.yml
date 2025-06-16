@@ -11,12 +11,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3  # Updated to v3
 
+      - name: Check for Extra Header
+        run: |
+          if git config --global --get http.https://github.com/.extraheader; then
+            echo "Extra header exists."
+          else
+            echo "No extra header found."
+          fi
+
       - name: Clear Git Config
         run: |
           git config --global --unset http.https://github.com/.extraheader || true
 
-      - name: Print Git Config
-        run: git config --list
+      - name: Reset Git Config
+        run: |
+          git config --global --remove-section http || true
+
+      - name: Verbose Git Config
+        run: git config --list --show-origin
 
       - name: Get Date
         id: get-date
