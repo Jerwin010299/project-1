@@ -1,34 +1,21 @@
 name: CI
+
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-22.04
 
+    permissions:
+      contents: read  # Required for actions/checkout
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Updated to v3
-
-      - name: Check for Extra Header
-        run: |
-          if git config --global --get http.https://github.com/.extraheader; then
-            echo "Extra header exists."
-          else
-            echo "No extra header found."
-          fi
-
-      - name: Clear Git Config
-        run: |
-          git config --global --unset http.https://github.com/.extraheader || true
-
-      - name: Reset Git Config
-        run: |
-          git config --global --remove-section http || true
-
-      - name: Verbose Git Config
-        run: git config --list --show-origin
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # Prevents extraheader warning
 
       - name: Get Date
         id: get-date
@@ -55,7 +42,7 @@ jobs:
           command: buildozer android debug
           buildozer_version: stable
 
-      - name: Upload artifacts
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: package
