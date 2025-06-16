@@ -5,26 +5,27 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # Ensure you're using a supported OS
+    runs-on: ubuntu-22.04  # Updated to use Ubuntu 22.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Used to cache dependencies with a timeout
       - name: Get Date
         id: get-date
         run: |
-          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+          echo "date=$(date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Cache Buildozer global directory
-        uses: actions/cache@v3  # Ensure you're using the latest version
+        uses: actions/cache@v3  # Updated to v3
         with:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }}
 
       - name: Cache Buildozer directory
-        uses: actions/cache@v3  # Ensure you're using the latest version
+        uses: actions/cache@v3  # Updated to v3
         with:
           path: .buildozer
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
@@ -37,7 +38,7 @@ jobs:
           buildozer_version: stable
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4  # Updated to use actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
