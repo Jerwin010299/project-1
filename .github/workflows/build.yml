@@ -14,14 +14,14 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python 3.11
       uses: actions/setup-python@v4
       with:
-        python-version: 3.11
+        python-version: "3.11"
 
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y \
@@ -32,40 +32,21 @@ jobs:
           pkg-config \
           libffi-dev \
           libssl-dev \
-          openjdk-8-jdk \
+          openjdk-11-jdk \
           unzip \
           zip \
           zlib1g-dev \
           libstdc++6 \
-          libffi-dev \
           libsqlite3-dev \
           libbz2-dev \
           liblzma-dev \
           libreadline-dev \
-          libssl-dev \
           libgdbm-dev \
-          libnss3-dev \
-          libsqlite3-dev \
-          libffi-dev \
-          liblzma-dev \
-          libbz2-dev \
-          libreadline-dev \
           libncursesw5-dev \
-          libgdbm-dev \
-          libdb5.3-dev \
-          libexpat1-dev \
-          libffi-dev \
-          libssl-dev \
-          libsqlite3-dev \
-          libbz2-dev \
-          liblzma-dev \
-          libreadline-dev \
-          libncursesw5-dev \
-          libgdbm-dev \
-          libdb5.3-dev \
-          libexpat1-dev \
-          libffi-dev \
-          libssl-dev
+          libexpat1-dev
+
+    - name: Install Python dependencies
+      run: |
         python -m pip install --upgrade pip
         pip install --upgrade buildozer cython python-for-android
 
@@ -74,30 +55,24 @@ jobs:
         mkdir -p $HOME/Android/Sdk
         cd $HOME/Android/Sdk
         wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
-        unzip cmdline-tools.zip
-        mkdir -p cmdline-tools/latest
-        mv cmdline-tools/* cmdline-tools/latest/
+        unzip cmdline-tools.zip -d cmdline-tools
+        rm cmdline-tools.zip
+        mv cmdline-tools/cmdline-tools cmdline-tools/latest
         export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-        export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+        export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
         yes | sdkmanager --licenses
-        sdkmanager "platform-tools" "platforms;android-28" "build-tools;28.0.3"
-
-    - name: Accept Android SDK licenses
-      run: yes | sdkmanager --licenses
-    - name: Install python-for-android explicitly
-      run: |
-        pip install --upgrade python-for-android
+        sdkmanager "platform-tools" "platforms;android-33" "build-tools;34.0.0"
+        sdkmanager --install "ndk;25.2.9519653"
 
     - name: Build APK
       run: |
-        buildozer android update
-        buildozer android clean
-        buildozer android debug
+        export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+        export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk/25.2.9519653
+        buildozer init
+        buildozer -v android debug
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
         name: banana-leaf-disease-scanner-apk
         path: bin/*.apk
-
-        
