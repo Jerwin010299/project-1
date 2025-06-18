@@ -36,7 +36,6 @@ jobs:
           unzip \
           zip \
           zlib1g-dev \
-          libncurses5 \
           libstdc++6 \
           libffi-dev \
           libsqlite3-dev \
@@ -55,7 +54,6 @@ jobs:
           libgdbm-dev \
           libdb5.3-dev \
           libexpat1-dev \
-          libmpdec-dev \
           libffi-dev \
           libssl-dev \
           libsqlite3-dev \
@@ -66,7 +64,6 @@ jobs:
           libgdbm-dev \
           libdb5.3-dev \
           libexpat1-dev \
-          libmpdec-dev \
           libffi-dev \
           libssl-dev
         python -m pip install --upgrade pip
