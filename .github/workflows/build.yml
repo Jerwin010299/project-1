@@ -1,0 +1,84 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          autoconf \
+          automake \
+          libtool \
+          pkg-config \
+          libffi-dev \
+          libssl-dev \
+          openjdk-8-jdk \
+          unzip \
+          zip \
+          zlib1g-dev \
+          libncurses5 \
+          libstdc++6 \
+          libffi-dev \
+          libsqlite3-dev \
+          libbz2-dev \
+          liblzma-dev \
+          libreadline-dev \
+          libssl-dev \
+          libgdbm-dev \
+          libnss3-dev \
+          libsqlite3-dev \
+          libffi-dev \
+          liblzma-dev \
+          libbz2-dev \
+          libreadline-dev \
+          libncursesw5-dev \
+          libgdbm-dev \
+          libdb5.3-dev \
+          libexpat1-dev \
+          libmpdec-dev \
+          libffi-dev \
+          libssl-dev \
+          libsqlite3-dev \
+          libbz2-dev \
+          liblzma-dev \
+          libreadline-dev \
+          libncursesw5-dev \
+          libgdbm-dev \
+          libdb5.3-dev \
+          libexpat1-dev \
+          libmpdec-dev \
+          libffi-dev \
+          libssl-dev
+        python -m pip install --upgrade pip
+        pip install --upgrade buildozer cython
+
+    - name: Build APK
+      run: |
+        buildozer android clean
+        buildozer android debug
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: banana-leaf-disease-scanner-apk
+        path: bin/*.apk
