@@ -49,7 +49,7 @@ android.minapi = 21
 android.ndk = 25b
 
 # (str) Android architecture to build for
-android.arch = armeabi-v7a
+android.archs = armeabi-v7a
 
 # (str) Main application file
 main.py = test.py
