@@ -68,9 +68,10 @@ jobs:
           libssl-dev
         python -m pip install --upgrade pip
         pip install --upgrade buildozer cython python-for-android
-    - name: Install python-for-android explicitly
+    - name: Clone python-for-android
       run: |
-        pip install --upgrade python-for-android
+        git clone https://github.com/kivy/python-for-android.git ~/.buildozer/android/platform/python-for-android
+
 
     - name: Build APK
       run: |
