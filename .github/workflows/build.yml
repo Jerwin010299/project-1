@@ -67,7 +67,7 @@ jobs:
           libffi-dev \
           libssl-dev
         python -m pip install --upgrade pip
-        pip install --upgrade buildozer cython
+        pip install --upgrade buildozer cython python-for-android
 
     - name: Build APK
       run: |
