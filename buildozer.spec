@@ -37,10 +37,10 @@ icon.filename = %(source.dir)s/data/icon.png
 android.permissions = CAMERA,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 
 # (str) Android SDK version to use
-android.sdk = 33
+android.sdk = 28
 
 # (int) Android API to use
-android.api = 33
+android.api = 28
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
@@ -48,117 +48,11 @@ android.minapi = 21
 # (str) Android NDK version to use
 android.ndk = 25b
 
-# (str) Android NDK path (if empty, it will be automatically downloaded.)
-android.ndk_path = /home/runner/Android/Sdk/ndk/25.2.9519653
+# (str) Android architecture to build for
+android.arch = armeabi-v7a
 
-# (str) Android SDK path (if empty, it will be automatically downloaded.)
-android.sdk_path = /home/runner/Android/Sdk
-
-# (list) Android application meta-data to set (key=value format)
-#android.meta_data =
-
-# (list) Android library project to add (will be added in the
-# project.properties automatically.)
-#android.library_references =
-
-# (str) Android logcat filters to use
-#android.logcat_filters = *:S python:D
-
-# (bool) Copy library sources for easier debugging
-#android.copy_libs = 1
-
-# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-android.archs = armeabi-v7a
-
-# (str) The name of the Android keystore to use.
-#android.keystore =
-
-# (str) The storage for the Android keystore
-#android.keystore.storage =
-
-# (str) The alias for the Android keystore
-#android.keystore.alias =
-
-# (str) The key password for the Android keystore
-#android.keystore.keypassword =
-
-# (str) The keystore password for the Android keystore
-#android.keystore.password =
-
-# (str) The main activity class name.
-#android.entrypoint = org.kivy.android.PythonActivity
-
-# (str) Extra java code to insert into AndroidManifest.xml
-#android.extra_manifest_xml =
-
-# (str) Extra xml to insert directly into AndroidManifest.xml
-#android.extra_xml =
-
-# (str) Override the app label
-#android.app_label =
-
-# (str) Override the process name
-#android.process_name =
-
-# (list) Permissions to grant (for example: ["android.permission.CAMERA"])
-#android.grant_permissions =
-
-# (int) Override the version code
-#android.numeric_version = 1
-
-# (str) Main activity class name
-#android.mainactivity = "org.kivy.android.PythonActivity"
-
-# (str) OUYA Console category
-#android.ouya.category = GAME
-
-# (str) Filename of your main.py
+# (str) Main application file
 main.py = test.py
-
-# (str) Filename of your app icon
-#icon.filename = %(source.dir)s/data/icon.png
-
-# (str) Filename of your app presplash
-#presplash.filename = %(source.dir)s/data/presplash.png
-
-# (list) List of service to declare
-#services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
 log_level = 2
-
-# (bool) Display a warning if the application is being run in development mode
-#warn_on_development = True
-
-# (bool) Indicate if the application should be deployed in debug mode
-#debug = False
-
-# (bool) Allow running the application in the background
-#background = False
-
-# (bool) Preserve temporary files such as python bytecode
-#preserve_temp = False
-
-# (bool) Clear temporary files such as python bytecode
-#clear_temp = True
-
-# (str) Python for android branch to use
-#p4a.branch = master
-
-# (str) Oboe version to use
-#oboe.version = 1.6.1
-
-# (str) OpenAL version to use
-#openal.version = 1.21.1
-
-# (str) SDL2 version to use
-#sdl2.version = 2.26.1
-
-# (str) SDL2 image version to use
-#sdl2.image.version = 2.6.2
-
-# (str) SDL2 mixer version to use
-#sdl2.mixer.version = 2.6.2
-
-# (str) SDL2 ttf version to use
-#sdl2.ttf.version = 2.20.2
