@@ -68,6 +68,9 @@ jobs:
           libssl-dev
         python -m pip install --upgrade pip
         pip install --upgrade buildozer cython python-for-android
+    - name: Install python-for-android explicitly
+      run: |
+        pip install --upgrade python-for-android
 
     - name: Build APK
       run: |
@@ -79,3 +82,5 @@ jobs:
       with:
         name: banana-leaf-disease-scanner-apk
         path: bin/*.apk
+
+        
