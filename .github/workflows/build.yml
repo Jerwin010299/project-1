@@ -36,14 +36,16 @@ jobs:
           libsqlite3-dev \
           libbz2-dev \
           liblzma-dev \
-          libncursesw5-dev
+          libncursesw5-dev \
+          git
 
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install --upgrade buildozer cython==0.29.36 python-for-android
+        pip install --upgrade buildozer cython==0.29.36
+        pip install python-for-android==2023.8.17
 
-    - name: Setup Android SDK
+    - name: Setup Android SDK and NDK
       run: |
         mkdir -p $HOME/Android/Sdk
         cd $HOME/Android/Sdk
@@ -56,6 +58,14 @@ jobs:
         yes | sdkmanager --licenses
         sdkmanager "platform-tools" "platforms;android-28" "build-tools;28.0.3"
         sdkmanager --install "ndk;25.2.9519653"
+        export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk/25.2.9519653
+
+    - name: Initialize Buildozer
+      run: |
+        export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+        export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk/25.2.9519653
+        buildozer init || true  # Ignore if spec file already exists
+        buildozer android update
 
     - name: Build APK
       run: |
