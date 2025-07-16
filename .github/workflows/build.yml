@@ -53,7 +53,7 @@ jobs:
         buildozer android debug
 
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v2  # Updated to v2
+      uses: actions/upload-artifact@v3  # Updated to v3
       with:
         name: banana-leaf-scanner-apk
         path: bin/*.apk
