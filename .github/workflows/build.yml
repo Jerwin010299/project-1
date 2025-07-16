@@ -1,4 +1,3 @@
-
 name: Build Android APK
 
 on:
@@ -54,7 +53,7 @@ jobs:
         buildozer android debug
 
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2  # Updated to v2
       with:
         name: banana-leaf-scanner-apk
         path: bin/*.apk
@@ -81,6 +80,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: bin/bananaleafscanner-0.1-armeabi-v7a-debug.apk
+        asset_path: bin/banana-leaf-scanner-0.1-armeabi-v7a-debug.apk
         asset_name: banana-leaf-scanner.apk
         asset_content_type: application/vnd.android.package-archive
