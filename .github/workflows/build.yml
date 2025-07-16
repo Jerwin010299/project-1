@@ -21,7 +21,7 @@ jobs:
           buildozer_version: stable
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@2 # Use the latest version to avoid deprecation issues
+        uses: actions/upload-artifact@3 # Use the latest version to avoid deprecation issues
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
