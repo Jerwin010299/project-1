@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [ main, master ]  # Specify your main branches here
+    branches: [ main, master ]
 
 jobs:
   build-android:
@@ -17,11 +17,11 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          workdir: .  # Since the app files are in the root directory
+          workdir: .  # Your application files are in the root directory
           buildozer_version: stable
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@3 # Use the latest version to avoid deprecation issues
+        uses: actions/upload-artifact@3  # Ensure correct version
         with:
           name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: ${{ steps.buildozer.outputs.filename }}  # Confirm this output is correct
