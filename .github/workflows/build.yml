@@ -21,7 +21,7 @@ jobs:
           buildozer_version: stable
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@4  # Ensure correct version
+        uses: actions/upload-artifact@1  # Ensure correct version
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}  # Confirm this output is correct
